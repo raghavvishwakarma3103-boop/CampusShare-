@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Campus Share - Nearby File Sharing{% endblock %}</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+                    <path d="M12 12v9"></path>
+                    <path d="m16 16-4-4-4 4"></path>
+                </svg>
+                <span class="logo-text">Campus<span class="highlight">Share</span></span>
+            </a>
+            <div class="network-badge" id="networkBadge" title="Your current local network server address">
+                <span class="status-dot online"></span>
+                <span class="ip-text">Local IP: {{ local_ip }}:5000</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p><strong>Campus Share</strong> &bull; Fast, direct file sharing over local Wi-Fi & hotspots.</p>
+            <p class="footer-subtext">No external internet required when connected on the same local network.</p>
+        </div>
+    </footer>
+
+    <!-- Global Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script>
+        // Global helper for toast notifications
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

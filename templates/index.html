@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Campus Share - Home{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        Direct Local Network Transfer
+    </div>
+    
+    <h1 class="hero-title">CAMPUS SHARE</h1>
+    <p class="hero-subtitle">"Share files even when the network isn't cooperating."</p>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('send_page') }}" class="btn btn-primary btn-hero">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Send File
+        </a>
+        <a href="{{ url_for('receive_page') }}" class="btn btn-secondary btn-hero">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Receive File
+        </a>
+    </div>
+
+    <div class="info-card">
+        <h3>⚡ Why Campus Share?</h3>
+        <p>
+            College Wi-Fi and mobile data can often be slow, congested, or completely offline. 
+            Campus Share connects nearby devices on the <strong>same local network</strong> (Wi-Fi or Hotspot) 
+            to transfer files directly without uploading them to remote cloud servers.
+        </p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📁</div>
+            <h4>Supported Formats</h4>
+            <p>Images, PDFs, TXT, documents, and small files up to 50 MB.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📶</div>
+            <h4>Any Local Network</h4>
+            <p>Works seamlessly over College Wi-Fi, Personal Wi-Fi, or Mobile Hotspots.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h4>Private & Secure</h4>
+            <p>Temporary 6-digit session codes with auto-expiring temporary files.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

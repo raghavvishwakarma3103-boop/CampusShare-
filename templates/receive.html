@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Campus Share - Receive File{% endblock %}
+
+{% block content %}
+<div class="card-container">
+    <div class="page-header">
+        <h2>RECEIVE FILE</h2>
+        <p>Enter the 6-digit code shared by the sender to connect and download the file.</p>
+    </div>
+
+    <!-- Step 1: Code Input -->
+    <div id="connectStep" class="step-card">
+        <form id="connectForm">
+            <div class="form-group">
+                <label for="codeInput" class="form-label">Enter Share Code</label>
+                <input type="text" id="codeInput" class="code-input" placeholder="482913" maxlength="6" value="{{ default_code }}" autocomplete="off" required>
+            </div>
+            <button type="submit" id="connectBtn" class="btn btn-primary btn-full mt-4">
+                Connect
+            </button>
+        </form>
+    </div>
+
+    <!-- Step 2: Transfer & Download Screen -->
+    <div id="transferStep" class="step-card hidden">
+        <!-- Status Indicator -->
+        <div class="status-card" id="recvStatusCard">
+            <div class="status-header">
+                <span class="status-indicator-dot connected" id="recvStatusDot"></span>
+                <span class="status-title" id="recvStatusTitle">Connected to sender</span>
+            </div>
+            <p class="status-desc" id="recvStatusDesc">Preparing file transfer...</p>
+        </div>
+
+        <!-- File Details Card -->
+        <div class="file-details-card mt-4">
+            <div class="file-icon-badge" id="recvFileTypeIcon">📄</div>
+            <div class="file-info-body">
+                <h4 class="recv-file-name" id="recvFileName">notes.pdf</h4>
+                <p class="recv-file-size" id="recvFileSize">8.4 MB</p>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section mt-4" id="recvProgressSection">
+            <div class="progress-info">
+                <span id="recvProgressLabel">Transferring...</span>
+                <span id="recvProgressPercent">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="recvProgressBarFill" style="width: 0%;"></div>
+            </div>
+            <span class="transfer-stats" id="transferStats">0 MB of 0 MB</span>
+        </div>
+
+        <!-- Interrupted Transfer Warning & Resume Button -->
+        <div id="resumeCard" class="warning-card hidden mt-4">
+            <p><strong>⚠️ Connection Interrupted!</strong></p>
+            <p>Transfer was paused. You can resume from the last completed chunk.</p>
+            <button id="resumeBtn" class="btn btn-warning btn-full mt-2">Resume Transfer</button>
+        </div>
+
+        <!-- Download Action Button -->
+        <div class="action-row mt-4">
+            <button id="downloadFileBtn" class="btn btn-success btn-full hidden">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download File
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/receive.js') }}"></script>
+{% endblock %}

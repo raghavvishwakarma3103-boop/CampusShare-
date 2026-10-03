@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Campus Share - Send File{% endblock %}
+
+{% block content %}
+<div class="card-container">
+    <div class="page-header">
+        <h2>SEND FILE</h2>
+        <p>Select a file to share with a nearby device on your local network.</p>
+    </div>
+
+    <!-- Step 1: File Selection -->
+    <div id="selectionStep" class="step-card">
+        <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+            </div>
+            <p class="drop-zone-text">Drag & drop your file here or click to browse</p>
+            <span class="drop-zone-sub">Supports Images, PDFs, TXT & Documents (Max 50 MB)</span>
+            <input type="file" id="fileInput" class="file-input" hidden>
+        </div>
+
+        <!-- Selected File Preview -->
+        <div id="filePreview" class="file-preview hidden">
+            <div class="file-info-header">
+                <div class="file-icon-badge" id="fileTypeIcon">📄</div>
+                <div class="file-details">
+                    <span class="file-name" id="fileName">notes.pdf</span>
+                    <span class="file-size" id="fileSize">8.4 MB</span>
+                </div>
+                <button type="button" class="btn-icon" id="removeFileBtn" title="Remove file">&times;</button>
+            </div>
+            <button id="createShareBtn" class="btn btn-primary btn-full mt-4">
+                Create Share
+            </button>
+        </div>
+    </div>
+
+    <!-- Step 2: Share Session & QR Code Display -->
+    <div id="shareStep" class="step-card hidden">
+        <div class="session-box">
+            <span class="session-label">Share Code</span>
+            <div class="code-display" id="codeDisplay">------</div>
+            <p class="session-hint">Tell the receiver to enter this code on their device or scan the QR code.</p>
+        </div>
+
+        <!-- QR Code Container -->
+        <div class="qr-container">
+            <img id="qrCodeImg" src="" alt="Session QR Code" class="qr-code-img hidden">
+            <div id="qrLoading" class="qr-loading">Generating QR Code...</div>
+        </div>
+
+        <!-- Connection & Transfer Status Indicator -->
+        <div class="status-card" id="statusCard">
+            <div class="status-header">
+                <span class="status-indicator-dot waiting" id="statusDot"></span>
+                <span class="status-title" id="statusTitle">Waiting for receiver...</span>
+            </div>
+            <p class="status-desc" id="statusDesc">Keep this page open. Share starts automatically when receiver connects.</p>
+        </div>
+
+        <!-- Upload Progress Bar -->
+        <div class="progress-section hidden" id="progressSection">
+            <div class="progress-info">
+                <span id="progressLabel">Sending file...</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <div class="action-row mt-4">
+            <button id="cancelShareBtn" class="btn btn-secondary btn-full">
+                Cancel Share
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/send.js') }}"></script>
+{% endblock %}
